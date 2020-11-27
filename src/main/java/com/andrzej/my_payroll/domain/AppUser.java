@@ -1,23 +1,18 @@
 package com.andrzej.my_payroll.domain;
 
-import com.andrzej.my_payroll.security.WebSecurityConfig;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Collection;
 import java.util.Collections;
 
 @Getter
-@NoArgsConstructor
 @Entity(name = "USERS")
 public class AppUser implements UserDetails {
 
@@ -28,11 +23,13 @@ public class AppUser implements UserDetails {
     private String password;
     private String role;
 
-    public AppUser(Long id, String username, String password, String role) {
-        this.id = id;
+    public AppUser(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public AppUser() {
     }
 
     @Override

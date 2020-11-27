@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.sortByQualityValue;
 
 @RestController
 @RequestMapping("/api")
@@ -38,7 +39,7 @@ public class UserController {
         return mapper.mapToUserDto(service.getUser(id));
     }
 
-    @PostMapping(value = "createUser", consumes = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody AppUserDto appUserDto) {
         service.saveUser(userDetailsService.encryptPassword(appUserDto));
     }
@@ -53,5 +54,8 @@ public class UserController {
         service.deleteUser(id);
     }
 
-
+    @GetMapping("/testApi")
+    public String testApi() {
+        return "Dzialam sprawnie";
+    }
 }
